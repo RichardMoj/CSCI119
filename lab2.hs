@@ -27,7 +27,7 @@ eqmod3_reln = [(i,j) | i <- [1..8], j <- [1..8], (j - i) `mod` 3 == 0]
 -- smallest reflexive relation over u. Anything that does not contain
 -- these 8 elements is not reflexive
 refl :: Reln -> Bool
-refl rs = undefined
+refl rs = [ (a,b) == (b,a) | a <- u, b <- u]
 
 -- Write a function symm that tests whether a relation is symmetric:
 -- R is symmetric if: forall a b, (a,b) in R -> (b,a) in R
@@ -99,8 +99,8 @@ r's't'_test = undefined
 -- nontrivial: forall X in P, exists x in U, x in X, or
 --             {} not in P
 -- total: forall x in U, exists X in P, x in X
--- disjoint: forall X,Y in U (exists a, a in X /\ a in Y) -> X = Y, or
---           forall X,Y in U, X /= Y -> X intersect Y = {}
+-- disjoint: forall X,Y in P (exists a, a in X /\ a in Y) -> X = Y, or
+--           forall X,Y in P, X /= Y -> X intersect Y = {}
 -- For example, here is the partitition of u corresponding to equivalence mod 3:
 eqmod3_part :: [[Int]]
 eqmod3_part = [[1,4,7], [2,5,8], [3,6]]
@@ -123,3 +123,8 @@ eq2part rs = undefined
 part2eq :: [[Int]] -> Reln
 part2eq bs = undefined
 
+
+-- Elem
+
+-- Transititive
+-- If {A} exists in B && {B} in C, then {A} in C
