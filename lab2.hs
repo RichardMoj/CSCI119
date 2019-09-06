@@ -26,8 +26,27 @@ eqmod3_reln = [(i,j) | i <- [1..8], j <- [1..8], (j - i) `mod` 3 == 0]
 -- Example: [(1,1),(2,2),(3,3),(4,4),(5,5),(6,6),(7,7),(8,8)] is the
 -- smallest reflexive relation over u. Anything that does not contain
 -- these 8 elements is not reflexive
+rs = [(1,1),(2,2),(3,3),(4,4),(5,5),(6,6),(7,7),(8,8)]
+
 refl :: Reln -> Bool
-refl rs = [ (a,b) == (b,a) | a <- u, b <- u]
+refl rs = and [ (n,n) `elem` [(1,1)] | n <- u]
+-- undefined--[ (a,b) == (b,a) | a <- u, b <- u]
+-- and [ (`elem` (n,n)) | n <- u]
+-- [ (n,n) `elem` rs | n <- u]
+
+-- refl should take a type Reln and output a Bool
+-- Take a list of  ordered pair of ints and output true/false
+-- So check to see if ordered reflexive pairs are found in
+-- the input list?
+
+-- elem returns whether something is in a list, usually used by infix
+-- function returning true/false
+
+
+
+
+
+
 
 -- Write a function symm that tests whether a relation is symmetric:
 -- R is symmetric if: forall a b, (a,b) in R -> (b,a) in R
