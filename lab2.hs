@@ -96,7 +96,7 @@ symm rs =  and [ (n,y) `elem` rs | (y,n) <- rs]
 -- R is transistive if: forall a b c, (a,b) in R /\ (b,c) in R -> (a,c) in R
 -- Example: [(1,2),(2,3),(1,3),(4,4)] is transitive but [(2,3),(3,2)] is not
 trans :: Reln -> Bool
-trans rs = undefined
+trans rs = and [ (n,r) `elem` rs | (n,y) <- rs, (z,r) <- rs, y == z]
 
 -- (n,y) `elem` rs
 -- (y,r) `elem` rs
@@ -109,8 +109,11 @@ trans rs = undefined
 
 -- [(n,r) `elem` rs | (n,y) <- rs, (y,r) <- rs]
 
---*Main> [ (n,r) `elem` [(1,2),(2,3),(1,3),(4,4)]  | (n,y) <- [(1,2),(2,3),(1,3),(4,4)], (y,r) <- [(1,2),(2,3),(1,3),(4,4)]]
---[True,True,True,False,False,True,True,False,True,True,True,False,False,False,False,True]
+-- *Main> [ (n,r) `elem` [(1,2),(2,3),(1,3),(4,4)]  | (n,y) <- [--(1,2),(2,3),(1,3),(4,4)], (y,r) <- [(1,2),(2,3),(1,3),(4,4)]]
+--[True,True,True,False,False,True,True,False,True,True,True,False,False,False,--False,True]
+ -- issue: grabbing first pair for n,y and grabbing same first pair for y,r
+ -- y,r should be a differrent pair, need to find a way to grab a second pair
+ -- that starts with the first y.
 
 
 
@@ -130,8 +133,8 @@ rst_test = refl rst && symm rst && trans rst
 
 -- refl, symm, not trans
 rst' :: Reln
-rst' = undefined
-rst'_test = undefined
+rst' = [(1,1), (2,2), (2,3), (3,2)]
+rst'_test = refl rst'
 
 -- refl, not symm, trans
 rs't :: Reln
