@@ -56,7 +56,31 @@ symm :: Reln -> Bool
 symm rs = undefined
 
 --[( ((n,y) `elem` [(1,1), (1,2), (2,1)]) && 
- --((y,n) `elem` [(1,1), (1,2), (2,1)]) | n <- u, y <- u)]
+ --((y,n) `elem` [(1,1), (1,2), (2,1)]) | n <- )]
+
+--[((n,y) `elem` [(1,1), (1,2), (2,1)]) && ((y,n) `elem` [(1,1), (1,2), (2,1)]) | n<-[1..2], y<-[1]]
+ -- Checks if (1,1) and (1,1) are elements
+ -- checks if (1,2) and (2,1) are elements
+ -- No need to check further
+ -- issue is y is already known and this is tailored for a specific value
+ -- not the solution?
+
+ -- [[((n,y) `elem` [(1,1), (1,2), (2,1)]) && ((y,n) `elem` [(1,1), (1,2), (2,1)]) | n<-[1..2]] | y<-[1..2]]
+ -- Checks for 1,1 then 2,1 - T/T
+ -- checks for 1,2 then 2,2 - T/F
+ -- get or? as long as one ordered pair and it's reverse is true?
+ -- then get the and?
+
+
+ -- 1,1     1,2,     2,1,          2,2
+ -- 1,1 & 1,1,     1,2 & 2,1,      2,1 && 1,2
+
+
+-- Still check if an ordered pair is in the input list
+-- 
+-- (i, j) `elem` rs
+
+
 
 -- Write a function trans that tests whether a relation is transitive:
 -- R is transistive if: forall a b c, (a,b) in R /\ (b,c) in R -> (a,c) in R
