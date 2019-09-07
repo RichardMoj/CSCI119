@@ -29,11 +29,12 @@ eqmod3_reln = [(i,j) | i <- [1..8], j <- [1..8], (j - i) `mod` 3 == 0]
 rs = [(1,1),(2,2),(3,3),(4,4),(5,5),(6,6),(7,7),(8,8)]
 
 refl :: Reln -> Bool
-refl rs = and [ (n,n) `elem` [(1,1)] | n <- u]
+refl rs = and [ (n,n) `elem` rs | n <- u]
 -- undefined--[ (a,b) == (b,a) | a <- u, b <- u]
 -- and [ (`elem` (n,n)) | n <- u]
 -- [ (n,n) `elem` rs | n <- u]
-
+-- [ (n,n) `elem` [(1,1)] | n <- u]
+	-- returns [T F F F F F F F]
 -- refl should take a type Reln and output a Bool
 -- Take a list of  ordered pair of ints and output true/false
 -- So check to see if ordered reflexive pairs are found in
@@ -53,6 +54,9 @@ refl rs = and [ (n,n) `elem` [(1,1)] | n <- u]
 -- Example: [(1,1), (1,2), (2,1)] is symmetric but [(1,1), (1,2)] is not.
 symm :: Reln -> Bool
 symm rs = undefined
+
+--[( ((n,y) `elem` [(1,1), (1,2), (2,1)]) && 
+ --((y,n) `elem` [(1,1), (1,2), (2,1)]) | n <- u, y <- u)]
 
 -- Write a function trans that tests whether a relation is transitive:
 -- R is transistive if: forall a b c, (a,b) in R /\ (b,c) in R -> (a,c) in R
