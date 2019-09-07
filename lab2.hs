@@ -53,10 +53,10 @@ refl rs = and [ (n,n) `elem` rs | n <- u]
 -- R is symmetric if: forall a b, (a,b) in R -> (b,a) in R
 -- Example: [(1,1), (1,2), (2,1)] is symmetric but [(1,1), (1,2)] is not.
 symm :: Reln -> Bool
-symm rs = undefined
+symm rs =  and [ (n,y) `elem` rs | (y,n) <- rs]
 
 --[( ((n,y) `elem` [(1,1), (1,2), (2,1)]) && 
- --((y,n) `elem` [(1,1), (1,2), (2,1)]) | n <- )]
+ --((y,n) `elem` [(1,1), (1,2), (2,1)]) | n <- u, y<-u)]
 
 --[((n,y) `elem` [(1,1), (1,2), (2,1)]) && ((y,n) `elem` [(1,1), (1,2), (2,1)]) | n<-[1..2], y<-[1]]
  -- Checks if (1,1) and (1,1) are elements
@@ -68,8 +68,17 @@ symm rs = undefined
  -- [[((n,y) `elem` [(1,1), (1,2), (2,1)]) && ((y,n) `elem` [(1,1), (1,2), (2,1)]) | n<-[1..2]] | y<-[1..2]]
  -- Checks for 1,1 then 2,1 - T/T
  -- checks for 1,2 then 2,2 - T/F
- -- get or? as long as one ordered pair and it's reverse is true?
+ -- get or? as long as one ordered pair and it's reverse exists?
  -- then get the and?
+
+
+-- [[((y,n) `elem` [(1,1), (1,2), (2,1)]) && ((n,y) `elem` [(1,1), (1,2), (2,1)]) | n<-[1..2]] | y<-[1..2]]
+-- Nearly Identical to ^, but checks through all possible variations
+-- of (y, n), where 'y' stays a single number first
+-- Ex: 1,1, 1,2 1,3, 1,4
+-- still not the solution
+-- The condition must be that if an ordered pair exists in the input list
+-- then the reverse ordered pair must exist as well
 
 
  -- 1,1     1,2,     2,1,          2,2
@@ -78,8 +87,9 @@ symm rs = undefined
 
 -- Still check if an ordered pair is in the input list
 -- 
--- (i, j) `elem` rs
-
+-- [ (n,y) `elem` [(1,1), (1,2), (2,1)] |  (y,n) <- [(1,1), (1,2), (2,1)]]
+-- checks if an reversed ordered pair exists in the input list
+-- for every ordered pair in the input list.
 
 
 -- Write a function trans that tests whether a relation is transitive:
@@ -87,6 +97,21 @@ symm rs = undefined
 -- Example: [(1,2),(2,3),(1,3),(4,4)] is transitive but [(2,3),(3,2)] is not
 trans :: Reln -> Bool
 trans rs = undefined
+
+-- (n,y) `elem` rs
+-- (y,r) `elem` rs
+-- (n,r) `elem` rs
+
+-- [ (n,y) `elem` rs && (y,r) `elem` rs <= (n,r) `elem` rs ]
+
+-- [ ((y,r) `elem` rs) && ((n,r) `elem` rs) | (n,y) <- rs]
+-- variable r not in scope
+
+-- [(n,r) `elem` rs | (n,y) <- rs, (y,r) <- rs]
+
+--*Main> [ (n,r) `elem` [(1,2),(2,3),(1,3),(4,4)]  | (n,y) <- [(1,2),(2,3),(1,3),(4,4)], (y,r) <- [(1,2),(2,3),(1,3),(4,4)]]
+--[True,True,True,False,False,True,True,False,True,True,True,False,False,False,False,True]
+
 
 
 -- Use the functions above to check the less, leq, and eqmod3 relations for
