@@ -26,7 +26,6 @@ eqmod3_reln = [(i,j) | i <- [1..8], j <- [1..8], (j - i) `mod` 3 == 0]
 -- Example: [(1,1),(2,2),(3,3),(4,4),(5,5),(6,6),(7,7),(8,8)] is the
 -- smallest reflexive relation over u. Anything that does not contain
 -- these 8 elements is not reflexive
-rs = [(1,1),(2,2),(3,3),(4,4),(5,5),(6,6),(7,7),(8,8)]
 
 refl :: Reln -> Bool
 refl rs = and [ (n,n) `elem` rs | n <- u]
@@ -42,10 +41,6 @@ refl rs = and [ (n,n) `elem` rs | n <- u]
 
 -- elem returns whether something is in a list, usually used by infix
 -- function returning true/false
-
-
-
-
 
 
 
@@ -138,33 +133,49 @@ rst'_test = not(trans rst') && (refl rst' && symm rst')
 
 -- refl, not symm, trans
 rs't :: Reln
-rs't = undefined
-rs't_test = undefined
+rs't = [(1,1), (2,2), (3,3), (4,4), (5,5), (6,6), (7,7), (8,8), (1,3)]
+rs't_test = (trans rs't && refl rs't) && not(symm rs't)
 
 -- refl, not symm, not trans
 rs't' :: Reln
-rs't' = undefined
-rs't'_test = undefined
+rs't' = [(1,1), (2,2), (3,3), (4,4), (5,5), (6,6), (7,7), (8,8), (2,3), (3,8)]
+rs't'_test = (not (trans rs't')) && (not (symm rs't')) && refl rs't'
+
+-- Adding a single extra order pair without it's reverse makes it non-sym
+-- Make that extra order pair non trans
 
 -- not refl, symm, trans
 r'st :: Reln
-r'st = undefined
-r'st_test = undefined
+r'st = [(2,2)]
+r'st_test = (symm r'st && trans r'st) && not(refl r'st)
+
+-- In order for something to be sym - there must be 2 pairs
+-- If the first ordered pair is not reflexive.
+-- [(2,3), (3,2)]
+-- [(2,2)]
+
+-- In order for something to be transitive - there must be 3 pairs
+-- If the first order pair is not reflexive.
+-- Can also be just a reflexive pair itself
+-- [(2,3), (3,4), (2,4)]
+-- [(2,2), (2,3)]
+-- [(2,2)]
 
 -- not refl, symm, not trans
 r'st' :: Reln
-r'st' = undefined
-r'st'_test = undefined
+r'st' = [(2,3), (3,2)]
+r'st'_test = not(trans r'st') && symm r'st' && not(refl r'st')
 
 -- not refl, not symm, trans
 r's't :: Reln
-r's't = undefined
-r's't_test = undefined
+r's't = [(2,3), (3,4), (2,4)]
+r's't_test = not(refl r's't) && not(symm r's't) && trans r's't
 
 -- not refl, not symm, not trans
 r's't' :: Reln
-r's't' = undefined
-r's't'_test = undefined
+r's't' = [(2,3)]
+r's't'_test = trans r's't'
+-- not(refl r's't') && not(symm r's't') && not(trans r's't')
 
 
 ---- PART 2: Partitions of u -----
@@ -183,6 +194,8 @@ eqmod3_part = [[1,4,7], [2,5,8], [3,6]]
 -- Write a function part that tests whether a list of lists is a partition of u
 part :: [[Int]] -> Bool
 part bs = undefined
+
+-- takes in a list of a list of ints and returns a bool
 
 
 -- Write a function eq2part that takes an equivalence relation on u as input
