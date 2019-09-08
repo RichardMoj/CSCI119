@@ -153,4 +153,18 @@ eq2part rs = undefined
 -- the associated equivalence relation on u. You can assume that the argument
 -- is really a partition of u.
 part2eq :: [[Int]] -> Reln
-part2eq bs = undefined
+part2eq bs = [(n,y) | x<-bs, n<-x, y<-x]
+-- [ (n,y) | n<- bs, y<-n]
+-- [(n,y) | n<-bs, y <- bs]
+-- head x | x <- [[1,2], [3,4]] gives [1,3]
+-- so that is tranversing through the list, and taking the head of each
+-- internal list
+-- [x | x<- [[1,2], [3,4] ] ] gives [[1,2], [3,4]]
+-- [(n,y) | ]
+
+-- [ (n,y) | x<-(head ([bs])) n<-x, y<-x]
+
+-- equivalence relation that uses the partition given
+-- use [[1,4,7], [2,5,8], [3,6]] for test
+-- output needs to be a list of ordered pairs from the input list
+-- that make the whole list trans, symm, and reflex
