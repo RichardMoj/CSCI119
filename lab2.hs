@@ -133,7 +133,7 @@ coverall xr = and [x `elem` (concat xr) | x <- u]
 -- when infact it is a part due to the bug above.
 -- This fixes it, by removing all internal dups inside of each list
 rmInternalDups :: [[Int]] -> [[Int]]
-rmInternalDups ls = [ nub(head([x])) | x <- ls]
+rmInternalDups ls = [ nub x | x <- ls]
 
 
 noDup :: [[Int]] -> Bool
