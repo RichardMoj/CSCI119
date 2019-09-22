@@ -49,16 +49,9 @@ eps = LOL 0 []
 lol :: [a] -> LOL a
 lol xs = LOL (length xs) xs
 
-
 -- Concatenation of LOLs, preserves invariant
 dot :: LOL a -> LOL a -> LOL a
 dot (LOL x xs) (LOL y ys) = (LOL (x+y) (xs++ys))
---(LOL (x+y) ([ n++r  | n<-[xs], r<-[ys], (LOL x xs) > (LOL y ys)]))
-
--- (LOL (x+y) (xs++ys))
--- Try
--- [ xs++ys  | xs<-["abab"], ys<-["bbb"], a<- [LOL 4 "abab"], b<- [LOL 3 "bbb"], a<b]
--- [ n++r  | n<-[xs], r<-[ys], (LOL x xs) > (LOL y ys)]
 
 -- Reverse of LOLs, preserves invariant
 rev :: LOL a -> LOL a
@@ -81,34 +74,23 @@ lang xs = norm $ map lol xs
 
 -- Merge of langages (aka "union")
 merge :: Ord a => Lang a -> Lang a -> Lang a
-merge [] [] = []
-merge (x:xs) [] = (x:xs) ++ []
-merge [] (y:ys) = (y:ys) ++ []
+merge [] [] = []                    -- base case 1, input error
+merge (x:xs) [] = (x:xs) ++ []      -- base case 2, final rec call
+merge [] (y:ys) = (y:ys) ++ []      -- base case 3, alt final rec call
 merge (x:xs) (y:ys) 
   | (x) < (y) = (x) : (merge (xs) (y:ys))
   | (x) > (y) = (y) : (merge (x:xs) (ys))
-  | otherwise = (x) : (merge (xs) (ys))
--- (LOL x xs) == (LOL y ys) = 
-  
-
-
--- [LOL 3 xs] ++ []
---LOL (x+y)
--- *Main> [LOL 2 "aa"]
--- ["aa"]
--- *Main> [LOL 2 "aa"] ++ []
--- ["aa"]
--- *Main> [LOL 2 "aa"] ++ ["bb"]
-
-
--- union_lang :: Language -> Language -> Language
--- union_lang l1 [] = l1
--- union_lang [] l2 = l2 
--- union_lang l1 l2 = nub ([ w |w<-l1]++[ x | x<-l2])
+  | otherwise = (x) : (merge (xs) (ys))  -- x and y must be the same
 
 -- Concatenation of languages
 cat :: Ord a => Lang a -> Lang a -> Lang a
-cat = undefined
+cat (x:xs) (y:ys) = [dot x y] ++ 
+ merge ([ dot n r | n<- [x], r<- ys]) ([dot a b | a <- xs, b <- (y:ys) ])
+
+
+-- [ dot r z | r <-[x], z<- [ys] ]  
+-- merge [dot (x) (ys)] [dot xs (y:ys)] - the problem: ys is a list of LOL
+
 
 -- Kleene star of languages
 kstar :: Ord a => Lang a -> Lang a
