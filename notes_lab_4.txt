@@ -1,0 +1,46 @@
+can't use norm $ in our definitions for cart or powerset
+no nub, sort, etc
+
+Assume user knows how to do correct stuff?
+
+check first element in ordered pair, if equal check other element in pair
+
+powerset - an element by element comparison
+
+x:xs == head:tail
+
+use "let" or "where" in the definition
+
+chapter 6 haskell learning book
+
+LOL checking numbers first then element by element 
+(LOL 3 "aaa") < (LOL 3 "bbb")
+
+redefining ++ and reverse type for LOL
+can use them in the definiton
+
+extract the list from LOL and pattern matching/stuff
+
+
+can't use norm in any of part 3
+
+
+for duplicates in merge, remove both, take 1
+
+
+merge can be used in concat definiton for languages
+	
+concat
+	dot x y  -> concat the head for both lists
+		dot x ys -> concat the head for list 1 and the rest of the list of l2
+			dot xs (y:ys) -> concat the rest of l1 with everything from l2
+
+
+
+case stripPrefix p s of
+	nothing ->
+	Just x ->
+
+
+
+toRE - working on a stack

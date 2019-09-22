@@ -146,8 +146,7 @@ part bs = noEmpty bs && coverall bs && noDup bs
 -- and returns the associated partition of u. You can assume that the input is
 -- really an equivalence relation on u.
 eq2part :: Reln -> [[Int]]
-eq2part rs = undefined
-
+eq2part rs = [nub [x,y] | (x,y) <- rs, x==y]
 
 -- Write a function part2eq that takes a partition of u as input and returns
 -- the associated equivalence relation on u. You can assume that the argument
