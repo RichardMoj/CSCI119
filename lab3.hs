@@ -1,5 +1,11 @@
 -- CSci 119, Lab 3
 
+-- Richard Mojarro
+-- CSCI 119
+-- Fall 2019
+
+
+
 -- See http://hackage.haskell.org/package/base-4.11.1.0/docs/Data-List.html
 import Data.List (sort, stripPrefix)
 
@@ -101,7 +107,7 @@ kstar xs = eps : cat xs (kstar xs)
 -- Left quotient of a language by an LOL (cf. Definition 2.16)
 -- Hint: Use the stripPrefix function
 leftq :: Ord a => LOL a -> Lang a -> Lang a
-leftq = undefined
+leftq (LOL x xs) (y:ys) = undefined
 
 
 ---- Regular expressions and the languages they denote 
@@ -158,3 +164,62 @@ finite xs = undefined
 
 
 -- Test all of the above operations extensively!            
+
+{- 
+cart
+
+*Main> cart [1,2] [1,2,3,4]
+[(1,1),(1,2),(1,3),(1,4),(2,1),(2,2),(2,3),(2,4)]
+
+*Main> cart [4,5] [1,2,3]
+[(4,1),(4,2),(4,3),(5,1),(5,2),(5,3)]
+
+
+
+power
+
+*Main> power []
+[[]]
+*Main> power [5]
+[[],[5]]
+*Main> power [5,6,7]
+[[],[5],[5,6],[5,6,7],[5,7],[6],[6,7],[7]]
+
+
+dot
+
+*Main> dot (LOL 4 "sour") (LOL 7 "pickles")
+"sourpickles"
+*Main> dot (LOL 5 "apple") (LOL 5 "tinis")
+"appletinis"
+*Main> 
+
+rev
+
+*Main> rev (LOL 6 "attack")
+"kcatta"
+*Main> rev (LOL 6 "kcatta")
+"attack"
+*Main> rev (LOL 3 "car")
+"rac"
+*Main> rev (LOL 3 "rac")
+"car"
+
+
+merge
+
+*Main> merge (lang ["aaa", "aba"]) (lang ["ba", "aaa"])
+["ba","aaa","aba"]
+*Main> merge (lang ["aaaa", "abab"]) (lang ["baa", "aaab"])
+["baa","aaaa","aaab","abab"]
+
+
+cat
+
+*Main> cat (lang ["aaa", "aba"]) (lang ["ba", "aaa"])
+["aaaba","ababa","aaaaaa","abaaaa"]
+*Main> cat (lang ["aaa", "abab"]) (lang ["ba", "aaa"])
+["aaaba","aaaaaa","ababba","ababaaa"]
+
+
+-}

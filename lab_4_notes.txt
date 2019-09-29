@@ -1,0 +1,53 @@
+-- no elem function in part 0?
+
+-- check element
+	-- check if element is greater than the just recently checked
+		-- recursively
+
+
+		^ just implement recursive part as <, >, == check automatically
+-- Lang orders the elements automatically
+
+
+
+Part 1
+
+--do recursive call on union
+
+
+--recursive calls on inf in infiniteness
+-- takes in a reg exp, returns a bool
+
+-reversal returns the reg exp back
+
+
+3-4 tests for each of the 7 operations on reg exp theorems
+
+
+
+Part 2
+
+-- can use take and drop, head, tail,
+-- can do list comprehension or recursively
+
+-- recursive calls on the iff section, union
+
+match (Let 'a') "a" = T
+concat
+	ab ? "ab"           w = "ab"
+	a = r1, b = r2
+
+	a? "" && b?"ab" = F
+	a ? "a" && b ? "b" = T
+
+	or the list to check if there is atleast one true
+
+
+-- make sure that w1 is NOT empty (epsilon)
+-- use null w1 to check if it is empty
+
+
+use a helper function for match 2
+
+--- helper function
+		m (union r1 r2: rs) c w
