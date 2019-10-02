@@ -1,0 +1,51 @@
+string will be finite
+
+Q = states
+	states will always be listed by integers
+	Q = [0,1,2] <-- example
+
+ts: Int -> Char -> Int
+ts 0 'b' -> 0
+ts 1 'a' -> 1
+
+
+4 helper functions?
+
+1. norm?
+
+2. elem
+
+3. and [ elem ]
+
+4. recursive or list comprehension
+	[ | q<- qs, sigma]
+	and ^
+	make sure every result is an elem of qs
+
+
+
+head and tail
+ts 1 'b'. empty
+
+delta* =  base 2 cases
+
+
+m@(qs, s, fs,ts) means m = to the whole thing () but can still reference
+		individual pieces such as qs
+
+
+acceptCons will be recursive
+
+
+
+
+
+part 2
+
+DRAW THE FSM first
+
+
+
+
+exactly
+	can make list of variable length [0..()]
